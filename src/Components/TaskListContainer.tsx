@@ -5,7 +5,7 @@ import {GET_TASKS} from "../graphql/get_tasks";
 import TaskCompletedMessage from "./TaskCompletedMessage";
 
 const httpLink = new HttpLink({
-    uri: "https://48p1r2roz4.sse.codesandbox.io",
+    uri: "https://demotivation-quotes-api.herokuapp.com/graphql",
 });
 const customClient = new ApolloClient({
     cache: new InMemoryCache(),
