@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import {TaskListContainer} from "./Components";
 import {ApolloProvider} from "@apollo/client";
 import {client} from "./client";
+import TaskListContainer from "./Components/TaskListContainer";
 
 function App() {
   return (

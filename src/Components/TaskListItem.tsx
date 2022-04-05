@@ -4,15 +4,14 @@ import {UPDATE_SUB_TASK_STATUS} from "../graphql/update-sub-task-status";
 import {GET_TASKS} from "../graphql/get_tasks";
 
 interface Props {
-    parentId:string,
     _id:string,
     name:string,
     isCompleted:boolean
 
 }
 
-const TaskListItem = ({ parentId, _id, name, isCompleted }:Props) => {
-    const [updateSubTaskStatus, { data:updateData, loading:updateLoading, error:updateError }] = useMutation(UPDATE_SUB_TASK_STATUS, {
+const TaskListItem = ({ _id, name, isCompleted }:Props) => {
+    const [updateSubTaskStatus, { data, loading, error }] = useMutation(UPDATE_SUB_TASK_STATUS, {
         refetchQueries: [
             GET_TASKS,
             'tasks'

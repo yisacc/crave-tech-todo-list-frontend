@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { IoIosCheckmark } from "react-icons/io";
 import TaskListItem from "./TaskListItem";
+import AddNewTask from "./AddNewTask";
 
 interface Props {
     _id:string,
@@ -14,7 +15,16 @@ interface Props {
     }]
 }
 
-const TaskListCard = ({ index,_id, name, isLocked ,subTasks}:Props) => {
+const TaskListCard = ({ index,_id, name ,subTasks}:Props) => {
+    const [isLocked,setIsLocked]=useState(false)
+    useEffect(()=>{
+        let unCompleted=subTasks.filter(subTask=>!subTask.isCompleted)
+        if(unCompleted.length===0){
+            setIsLocked(true)
+        }else {
+            setIsLocked(false)
+        }
+    },[subTasks])
 
     return (
         <div className="w-64 bg-white rounded-sm px-1 my-2">
@@ -32,12 +42,13 @@ const TaskListCard = ({ index,_id, name, isLocked ,subTasks}:Props) => {
           </span>
                 )}
             </div>
-            {subTasks.map((task) => (
+            {subTasks.map((task,index) => (
                 <TaskListItem
-                    key={Math.random()}
+                    key={index}
                     {...{ ...task, ...{ parentId: _id }}}
                 />
             ))}
+            <AddNewTask id={_id} />
         </div>
     );
 };
